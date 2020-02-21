@@ -8,15 +8,29 @@ body{
 
 }
 
+.hiddenRes {
+	visibility: hidden;
+}
+
 .imgLoc{
 	height: 300px;
 	width: 100%;
+}
+
+#Restaurants {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	flex-wrap: nowrap;
+	margin: 0;
 }
 
 #Loc{
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
+	flex-wrap: nowrap;
+	margin: 0;
 }
 
 .hideInfo{
