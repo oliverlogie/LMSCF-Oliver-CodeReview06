@@ -1,20 +1,19 @@
 let objPlaces: Array<Places>;
 let objRestaurants: Array<Restaurant>;
-let objEvents: Array<Restaurant>;
+let objEvents: Array<Events>;
 objPlaces = [];
 objRestaurants = [];
 objEvents = [];
 // let iArray = [];
 // let aArray = [];
 
-let theLocation: Array<string>= ["Vienna", "India","China","Russia"];
-let resName: Array<string>= ["Addicted to Rock", "Aurelius", "PIZZA Mari", "Figlmüller"];
-let zipCode: Array<string>= ["1020","1220", "1130", "1000"];
-// let adress:  Array<string>= ["Riesenradplatz 1, Vienna", "Stephansplatz 3, Vienna", "Maxingstraße 13b, 1130 Vienna","blalal"];
-let placeAdress: Array<string> = ["Riesenradplatz 1, Vienna", "Stephansplatz 3, Vienna", "Maxingstraße 13b, 1130 Vienna","blalal"];
+let theLocation: Array<string>= ["Russia", "India","China","Vienna"];
+let resName: Array<string>= ["Addicted to Rock", "Aurelius", "SUSHI Mari", "Figlmüller"];
+let zipCode: Array<string>= ["1020","1220", "1130", "1060"];
+let adress:  Array<string>= ["Riesenradplatz 1, Vienna", "Stephansplatz 3, Vienna", "Maxingstraße 13b, 1130 Vienna","Tokiostraße 7"];
 let restaurantAdress: Array<string> = ["Schwarzenbergplatz 1, Vienna", "Stephansplatz 3, Vienna", "Maxingstraße 13b, 1130 Vienna","blalal"];
-let imgPlace: Array<string>= ["img/prater.jpg","img/Stephansdom.jpg", "img/Schonbrunn.jpg","img/Schonbrunn.jpg"];
-let imgRestaurant: Array<string>= ["img/burger.jpg","img/Fisch.jpg", "img/Pizza.jpg","img/Schnitzel.jpg"];
+let imgPlace: Array<string>= ["img/Moschee.png","img/India.jpg", "img/China.jpg","img/vienna.jpg"];
+let imgRestaurant: Array<string>= ["img/burger.jpg","img/Fisch.jpg", "img/sushi.jpg","img/Schnitzel.jpg"];
 let food: Array<string>= ["Burger", "Fish", "Pizza", "Schnitzel"];
 let link: Array<string>=["http://www.restaurant-on.at/","biofrische.wien","https://www.mjam.net/","https://www.leontine.at/"];
 let tele: Array<number>=[067626176231, 977237231123, 637812423643, 123712426785];
@@ -52,39 +51,39 @@ class Restaurant extends Places{
     }
 }
 
-// class Events extends Places{
-//     eventDate:string;
-//     eventTime:string;
+class Events extends Places{
+    eventDate:string;
+    eventTime:string;
 
-//     constructor(theLocation, zipCode, adress ){
-//         super(theLocation, zipCode, adress, imgPlace);
-//         this.eventDate = eventDate;
-//         this.eventTime = eventTime;
-//     }
-// }
+    constructor(theLocation, zipCode, adress, eventDate, eventTime){
+        super(theLocation, zipCode, adress, imgPlace);
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
+    }
+}
 
 function creationLocation(type: string){
     if (type === 'places') {
         for (let i = 0; i<4; i++){
-            let place = new Places(theLocation[i], zipCode[i],placeAdress[i],imgPlace[i])
+            let place = new Places(theLocation[i], zipCode[i],adress[i],imgPlace[i])
             objPlaces.push(place);
         }
     }
     else if (type === 'restaurants') {
         for (let i = 0; i<4; i++){
-            let res = new Restaurant(theLocation[i], zipCode[i],restaurantAdress[i], food[i], link[i], tele[i],imgRestaurant[i], resName[i] )
+            let res = new Restaurant(theLocation[i], zipCode[i],adress[i], food[i], link[i], tele[i],imgRestaurant[i], resName[i] )
             objRestaurants.push(res);
         }
     }
-    // else if (type === 'events') {
-    //     for (let i = 0; i<4; i++){
-    //         let res = new Restaurant(theLocation[i], zipCode[i],restaurantAdress[i],imgPlace[i], food[i], link[i], tele[i])
-    //         objRestaurants.push(res);
-    //     }
-    // }
+    else if (type === 'events') {
+        for (let i = 0; i<4; i++){
+            let event = new Events(theLocation[i], zipCode[i], adress[i], eventDate[i], eventTime[i])
+            objEvents.push(event);
+        }
+    }
 }
 
-function showMore(index: number) {
+function showRes(index: number) {
     console.log('I GET HIT');
     if($(`#res${index}`).css('visibility') == 'hidden') {
         $(`#res${index}`).css('visibility', 'visible')
@@ -93,6 +92,17 @@ function showMore(index: number) {
         $(`#res${index}`).css('visibility', 'hidden')
     }
 }
+
+function showEve(index: number) {
+    console.log('I GET HIT');
+    if($(`#event${index}`).css('visibility') == 'hidden') {
+        $(`#event${index}`).css('visibility', 'visible')
+    }
+    else {
+        $(`#event${index}`).css('visibility', 'hidden')
+    }
+}
+
 function showInfo(index: number) {
 $(document).ready(function() {
         $(`#button${index}`).parent().find(".hideInfo").toggle();
@@ -105,18 +115,18 @@ function createCard(){
     var CardsLocation = "";
     for (let i=0; i < objPlaces.length; i++) {
         CardsLocation += `
-        <div class="card m-2 text-black flex-shrink-1 col-lg-4 col-md-6 col-sm-12 border">
+        <div class="card text-black col-lg-3 col-md-6 col-sm-12 border">
                         <div class="Card">
                         <p><img src="${objPlaces[i].imgPlace}" class="imgLoc" alt="${objPlaces[i].theLocation}"></p>
-                        <h3>${objPlaces[i].theLocation}</h3>
+                        <h3 class="shadow-sm">${objPlaces[i].theLocation}</h3>
                         <div class="hideInfo">
                         <p>${objPlaces[i].zipCode}</p>
                         <p>${objPlaces[i].adress }</p>
                         </div>
                         <button onclick="showInfo(${i})" type="submit" class="p-3" id="button${i}">More Infos</button>
                         </div>
-                        <button onclick="showMore(${i})" type="submit" class="p-3" id="button2${i}">Show Restaurants</button>
-                        <button onclick="showMore(${i})" type="submit" class="p-3" id="button3${i}">Show Events</button>
+                        <button onclick="showRes(${i})" type="submit" class="p-3 mb-3" id="button2${i}">Show Restaurants</button>
+                        <button onclick="showEve(${i})" type="submit" class="p-3 mb-3" id="button3${i}">Show Events</button>
                         </div>
                     </div>
                 </div>
@@ -131,15 +141,19 @@ function createRestaurant(){
     var CardsRestaurant = "";
     for (let i=0; i < objRestaurants.length; i++) {
             CardsRestaurant += `
-             <div id="res${i}" class="hiddenRes m-2 flex-shrink-1  card text-white p-0 col-lg-3 col-md-6 col-sm-12 bg-warning border">
+             <div id="res${i}" class="hiddenRes card text-black p-0 col-lg-3 col-md-6 col-sm-12 border">
                                 <div  class="Card">
                                 <p><img src="${objRestaurants[i].imgRestaurant}" class="imgLoc"></p>
                                 <h3>${objRestaurants[i].resName}</h3>
-                                <p>Adress: ${objRestaurants[i].adress}</p>
+                                <div class="shadow">
+                                <p class="">Adress: ${objRestaurants[i].adress}</p>
+                                <p>Adress: ${objRestaurants[i].theLocation}</p>
                                 <p>ZIP: ${objRestaurants[i].zipCode}</p>
                                 <p>Specialised on: ${objRestaurants[i].food}</p>
                                 <p>Link: ${objRestaurants[i].link}</p>
                                 <p>Tel: ${objRestaurants[i].tele}</p>
+                                </div>
+                                <button onclick="showEve(${i})" type="submit" class="p-3 mb-3" id="button3${i}">Show Events</button>
                                 </div>
                             </div>
                         </div>
@@ -148,6 +162,27 @@ function createRestaurant(){
                 `;
             };
    document.getElementById('Restaurants').innerHTML = CardsRestaurant;
+};
+
+function createEvents(){
+    var CardsEvents = "";
+    for (let i=0; i < objEvents.length; i++) {
+            CardsEvents += `
+             <div id="event${i}" class="hiddenRes card text-black p-0 col-lg-3 col-md-6 col-sm-12 border">
+                                <div  class="Card">
+                                <div class="shadow">
+                                <p>Adress: ${objEvents[i].adress}</p>
+                                <p>Country: ${objEvents[i].theLocation}</p>
+                                <p>ZIP: ${objEvents[i].zipCode}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            };
+   document.getElementById('Events').innerHTML = CardsEvents;
 };
 
 creationLocation('places');
@@ -159,3 +194,5 @@ creationLocation('events');
 createCard();
 
 createRestaurant();
+
+createEvents();

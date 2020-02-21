@@ -8,20 +8,31 @@ body{
 
 }
 
+.bgNav{
+	background: url("../img/banner.jpg");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	object-fit: cover;
+
+}
+
+
+
 .hiddenRes {
 	visibility: hidden;
 }
 
 .imgLoc{
 	height: 300px;
-	width: 100%;
+	width: 80%;
 }
 
 #Restaurants {
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
-	flex-wrap: nowrap;
 	margin: 0;
 }
 
@@ -29,7 +40,13 @@ body{
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
-	flex-wrap: nowrap;
+	margin: 0;
+}
+
+#Events{
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
 	margin: 0;
 }
 
@@ -41,4 +58,8 @@ body{
 }
 .navbar{
 	justify-content: space-around;
+}
+
+.mycarousel{
+	height: 500px;
 }
