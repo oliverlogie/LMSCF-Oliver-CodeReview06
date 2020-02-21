@@ -1,0 +1,12 @@
+.imgLoc{
+	height: 300px;
+	width: 100%;
+}
+
+#Loc{
+	justify-content: space-between;
+}
+
+.hideInfo{
+		display: none;
+	}
