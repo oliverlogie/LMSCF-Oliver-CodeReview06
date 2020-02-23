@@ -26,9 +26,11 @@ var adress = ["Riesenradplatz 1, Vienna", "Stephansplatz 3, Vienna", "Maxingstra
 var restaurantAdress = ["Schwarzenbergplatz 1, Vienna", "Stephansplatz 3, Vienna", "Maxingstraße 13b, 1130 Vienna", "blalal"];
 var imgPlace = ["img/Moschee.png", "img/India.jpg", "img/China.jpg", "img/vienna.jpg"];
 var imgRestaurant = ["img/burger.jpg", "img/Fisch.jpg", "img/sushi.jpg", "img/Schnitzel.jpg"];
+var imgEvents = ["img/event1.jpg", "img/event2.jpg", "img/event3.jpg", "img/event4.jpg"];
 var food = ["Burger", "Fish", "Pizza", "Schnitzel"];
 var link = ["http://www.restaurant-on.at/", "biofrische.wien", "https://www.mjam.net/", "https://www.leontine.at/"];
 var tele = [067626176231, 977237231123, 637812423643, 123712426785];
+var eventName = ["Der Hangar-7", 'Freak Out - “It started in the Sixties”', "LEAD TODAY. SHAPE TOMORROW", "Empowering Agile Konferenz"];
 var eventDate = ["12.3.2021", "16.9.2021", "28.6.2021", "17.1.2021"];
 var eventTime = ["17:00", "19:30", "13:00", "20:00"];
 var Places = /** @class */ (function () {
@@ -55,10 +57,12 @@ var Restaurant = /** @class */ (function (_super) {
 }(Places));
 var Events = /** @class */ (function (_super) {
     __extends(Events, _super);
-    function Events(theLocation, zipCode, adress, eventDate, eventTime) {
+    function Events(theLocation, zipCode, adress, eventDate, eventTime, imgEvents, eventName) {
         var _this = _super.call(this, theLocation, zipCode, adress, imgPlace) || this;
         _this.eventDate = eventDate;
         _this.eventTime = eventTime;
+        _this.imgEvents = imgEvents;
+        _this.eventName = eventName;
         return _this;
     }
     return Events;
@@ -78,7 +82,7 @@ function creationLocation(type) {
     }
     else if (type === 'events') {
         for (var i = 0; i < 4; i++) {
-            var event_1 = new Events(theLocation[i], zipCode[i], adress[i], eventDate[i], eventTime[i]);
+            var event_1 = new Events(theLocation[i], zipCode[i], adress[i], eventDate[i], eventTime[i], imgEvents[i], eventName[i]);
             objEvents.push(event_1);
         }
     }
@@ -127,7 +131,7 @@ function createRestaurant() {
 function createEvents() {
     var CardsEvents = "";
     for (var i = 0; i < objEvents.length; i++) {
-        CardsEvents += "\n             <div id=\"event" + i + "\" class=\"hiddenRes card text-black p-0 col-lg-3 col-md-6 col-sm-12 border\">\n                                <div  class=\"Card\">\n                                <div class=\"shadow\">\n                                <p>Adress: " + objEvents[i].adress + "</p>\n                                <p>Country: " + objEvents[i].theLocation + "</p>\n                                <p>ZIP: " + objEvents[i].zipCode + "</p>\n                                </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                ";
+        CardsEvents += "\n             <div id=\"event" + i + "\" class=\"hiddenRes card text-black p-0 col-lg-3 col-md-6 col-sm-12 border\">\n                                <div  class=\"Card\">\n                                <p><img src=\"" + objEvents[i].imgEvents + "\" class=\"imgLoc\" alt=\"" + objEvents[i].theLocation + "\"></p>\n                                <div class=\"shadow\">\n                                <h3> " + objEvents[i].eventName + "</h3>\n                                <p>Adress: " + objEvents[i].adress + "</p>\n                                <p>Country: " + objEvents[i].theLocation + "</p>\n                                <p>ZIP: " + objEvents[i].zipCode + "</p>\n                                <p>Date: " + objEvents[i].eventDate + "</p>\n                                <p>Time: " + objEvents[i].eventTime + "</p>\n                                </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                ";
     }
     ;
     document.getElementById('Events').innerHTML = CardsEvents;

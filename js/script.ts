@@ -14,9 +14,11 @@ let adress:  Array<string>= ["Riesenradplatz 1, Vienna", "Stephansplatz 3, Vienn
 let restaurantAdress: Array<string> = ["Schwarzenbergplatz 1, Vienna", "Stephansplatz 3, Vienna", "Maxingstraße 13b, 1130 Vienna","blalal"];
 let imgPlace: Array<string>= ["img/Moschee.png","img/India.jpg", "img/China.jpg","img/vienna.jpg"];
 let imgRestaurant: Array<string>= ["img/burger.jpg","img/Fisch.jpg", "img/sushi.jpg","img/Schnitzel.jpg"];
+let imgEvents: Array<string>= ["img/event1.jpg","img/event2.jpg", "img/event3.jpg","img/event4.jpg"];
 let food: Array<string>= ["Burger", "Fish", "Pizza", "Schnitzel"];
 let link: Array<string>=["http://www.restaurant-on.at/","biofrische.wien","https://www.mjam.net/","https://www.leontine.at/"];
 let tele: Array<number>=[067626176231, 977237231123, 637812423643, 123712426785];
+let eventName: Array<string>=["Der Hangar-7", 'Freak Out - “It started in the Sixties”', "LEAD TODAY. SHAPE TOMORROW", "Empowering Agile Konferenz"];
 let eventDate: Array<string>=["12.3.2021", "16.9.2021", "28.6.2021", "17.1.2021"];
 let eventTime: Array<string>=["17:00", "19:30", "13:00", "20:00"];
 
@@ -54,11 +56,15 @@ class Restaurant extends Places{
 class Events extends Places{
     eventDate:string;
     eventTime:string;
+    imgEvents:string;
+    eventName:string;
 
-    constructor(theLocation, zipCode, adress, eventDate, eventTime){
+    constructor(theLocation, zipCode, adress, eventDate, eventTime,imgEvents,eventName){
         super(theLocation, zipCode, adress, imgPlace);
         this.eventDate = eventDate;
         this.eventTime = eventTime;
+        this.imgEvents = imgEvents;
+        this.eventName = eventName;
     }
 }
 
@@ -77,7 +83,7 @@ function creationLocation(type: string){
     }
     else if (type === 'events') {
         for (let i = 0; i<4; i++){
-            let event = new Events(theLocation[i], zipCode[i], adress[i], eventDate[i], eventTime[i])
+            let event = new Events(theLocation[i], zipCode[i], adress[i], eventDate[i], eventTime[i], imgEvents[i], eventName[i])
             objEvents.push(event);
         }
     }
@@ -170,10 +176,14 @@ function createEvents(){
             CardsEvents += `
              <div id="event${i}" class="hiddenRes card text-black p-0 col-lg-3 col-md-6 col-sm-12 border">
                                 <div  class="Card">
+                                <p><img src="${objEvents[i].imgEvents}" class="imgLoc" alt="${objEvents[i].theLocation}"></p>
                                 <div class="shadow">
+                                <h3> ${objEvents[i].eventName}</h3>
                                 <p>Adress: ${objEvents[i].adress}</p>
                                 <p>Country: ${objEvents[i].theLocation}</p>
                                 <p>ZIP: ${objEvents[i].zipCode}</p>
+                                <p>Date: ${objEvents[i].eventDate}</p>
+                                <p>Time: ${objEvents[i].eventTime}</p>
                                 </div>
                                 </div>
                             </div>
