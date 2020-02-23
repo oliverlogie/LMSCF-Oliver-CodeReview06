@@ -63,3 +63,12 @@ body{
 .mycarousel{
 	height: 500px;
 }
+
+.navbar a{
+	font-size: 25px;
+	color: white;
+}
+
+.navbar p{
+	font-size: 25px;
+}

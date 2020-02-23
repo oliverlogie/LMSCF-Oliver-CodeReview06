@@ -21,6 +21,7 @@ let tele: Array<number>=[067626176231, 977237231123, 637812423643, 123712426785]
 let eventName: Array<string>=["Der Hangar-7", 'Freak Out - “It started in the Sixties”', "LEAD TODAY. SHAPE TOMORROW", "Empowering Agile Konferenz"];
 let eventDate: Array<string>=["12.3.2021", "16.9.2021", "28.6.2021", "17.1.2021"];
 let eventTime: Array<string>=["17:00", "19:30", "13:00", "20:00"];
+let eventPrice: Array<string>=["50€", "110€", "75€", "free"];
 
 class Places {
     theLocation: string;
@@ -58,13 +59,15 @@ class Events extends Places{
     eventTime:string;
     imgEvents:string;
     eventName:string;
+    eventPrice:string;
 
-    constructor(theLocation, zipCode, adress, eventDate, eventTime,imgEvents,eventName){
+    constructor(theLocation, zipCode, adress, eventDate, eventTime,imgEvents,eventName,eventPrice){
         super(theLocation, zipCode, adress, imgPlace);
         this.eventDate = eventDate;
         this.eventTime = eventTime;
         this.imgEvents = imgEvents;
         this.eventName = eventName;
+        this.eventPrice = eventPrice;
     }
 }
 
@@ -83,7 +86,7 @@ function creationLocation(type: string){
     }
     else if (type === 'events') {
         for (let i = 0; i<4; i++){
-            let event = new Events(theLocation[i], zipCode[i], adress[i], eventDate[i], eventTime[i], imgEvents[i], eventName[i])
+            let event = new Events(theLocation[i], zipCode[i], adress[i], eventDate[i], eventTime[i], imgEvents[i], eventName[i], eventPrice[i])
             objEvents.push(event);
         }
     }
@@ -184,6 +187,7 @@ function createEvents(){
                                 <p>ZIP: ${objEvents[i].zipCode}</p>
                                 <p>Date: ${objEvents[i].eventDate}</p>
                                 <p>Time: ${objEvents[i].eventTime}</p>
+                                <p>Price: ${objEvents[i].eventPrice}</p>
                                 </div>
                                 </div>
                             </div>
